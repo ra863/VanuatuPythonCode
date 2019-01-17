@@ -14,7 +14,7 @@ from tkinter import messagebox
 from tkinter import simpledialog
 
 # Add Get COM port input if file not found
-# 14:47 17/01/19 On Windows.
+# 22:00 17/01/19 On Windows.
 
 CONSTANT_BOX_NUMBER = "1"
 
