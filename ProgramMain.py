@@ -14,7 +14,7 @@ from tkinter import messagebox
 from tkinter import simpledialog
 
 # Add Get COM port input if file not found
-# 22:00 17/01/19 On Windows.
+# 11:38 18/01/19 On Windows.
 
 CONSTANT_BOX_NUMBER = "1"
 
@@ -38,12 +38,18 @@ class SerialThread(threading.Thread):
                 print("Windows")
 
     def run(self):
-
-        print("Local COM PORT: " + self.localComPortValue[0])
-        if sys.platform == "darwin":
-            s = serial.Serial(self.localComPortValue[0], 9600) # On my macbook its '/dev/tty.usbmodemHLR46000'
-        else:
-            s = serial.Serial(self.localComPortValue[0], 9600) # On my macbook 'COM3'
+        # TODO - Sometimes this is the single letter C. Other times it is the first element. Needs to be the same.
+        if (type(self.localComPortValue) is str):
+            print("LOAD AGAIN")
+            if sys.platform == "darwin":
+                s = serial.Serial(self.localComPortValue, 9600) # On my macbook its '/dev/tty.usbmodemHLR46000'
+            else:
+                s = serial.Serial(self.localComPortValue, 9600) # On my macbook 'COM3'
+        else: # TODO - These are the right way to do it for every file load apart from the first one.
+            if sys.platform == "darwin":
+                s = serial.Serial(self.localComPortValue[0], 9600) # On my macbook its '/dev/tty.usbmodemHLR46000'
+            else:
+                s = serial.Serial(self.localComPortValue[0], 9600) # On my macbook 'COM3'
 
         while True:
             if s.inWaiting():
@@ -226,7 +232,8 @@ class App(tk.Tk):
                     
                 self.lines = temp
 
-        print(self.lines)
+        #print(" Temp is: " + temp)
+        print("Self.lines is: " + str(self.lines))
         return self.lines
 
 # Function to load the graphs on which the data is displayed in real time. Data from graphs is obtained from the save
@@ -236,7 +243,7 @@ class App(tk.Tk):
     def loadGraph(self):
 
         if sys.platform == "darwin":
-            print("Mac")
+            #print("Mac")
 
             username = getpass.getuser()
 
@@ -246,7 +253,7 @@ class App(tk.Tk):
             except:
                 print("No Data for this graph, Mac")
         else:
-            print("Windows")
+            #print("Windows")
             try:
                 x, y = np.loadtxt('C:/Temp/data_temperature' + CONSTANT_BOX_NUMBER + '.csv', delimiter=',', unpack=True)
                 a, b = np.loadtxt('C:/Temp/data_light' + CONSTANT_BOX_NUMBER + '.csv' , delimiter=',', unpack=True)
