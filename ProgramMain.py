@@ -15,6 +15,7 @@ from tkinter import simpledialog
 
 # Add Get COM port input if file not found
 # 11:38 18/01/19 On Windows.
+# Opened on Mac
 
 CONSTANT_BOX_NUMBER = "1"
 
