@@ -13,9 +13,9 @@ import numpy as np
 from tkinter import messagebox
 from tkinter import simpledialog
 
-# 16:04 09/02/19 opened on windows
-# Version of programming as part of measurements made every 5 seconds with no averaging included
-#  ties with version of embedded code also before editing.
+# 16:10 09/02/19 opened on windows
+# New trial version of the program with more realistic sampling timings and the addition of averaging.
+#  Tied with updated version of embedded code doing the same.
 
 CONSTANT_BOX_NUMBER = "1"
 
